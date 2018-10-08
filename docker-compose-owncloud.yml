@@ -1,0 +1,17 @@
+owncloud:
+  image: owncloud
+  restart: always
+  expose:
+   - 80
+  volumes_from:
+    - owncloud-data
+  domainname: cloud.noneck.io  # REPLACE THIS WITH YOUR HOSTNAME
+
+owncloud-data:
+  image: owncloud
+  # DATA CONTAINER, exit after container is created
+  # Also fix permissions on data folders (33 is www-data UID)
+  command: /bin/bash -c "/bin/chown -R 33 /var/www/html/config"
+  volumes:
+    - /var/www/html/data
+    - /var/www/html/config
