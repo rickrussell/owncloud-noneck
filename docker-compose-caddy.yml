@@ -1,0 +1,11 @@
+caddy:
+  image: rickrussell/caddy
+  ports:
+    - 80:80
+    - 443:443
+  volumes:
+    - ./Caddyfile:/Caddyfile
+    - ./caddy:/root/.caddy
+  restart: always
+  links:
+    - owncloud
